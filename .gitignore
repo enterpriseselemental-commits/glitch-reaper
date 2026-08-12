@@ -1,0 +1,14 @@
+node_modules/
+coverage/
+dist/
+build/
+test-artifacts/
+*.zip
+*.crx
+*.xpi
+.env
+.env.*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

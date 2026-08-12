@@ -1,0 +1,214 @@
+:root {
+  color-scheme: dark;
+  font-family: Montserrat, "Arial Black", Arial, sans-serif;
+  font-synthesis: none;
+  --page: #d8d8d8;
+  --page-dark: #8d8d8d;
+  --panel-top: #5b5b5b;
+  --panel-middle: #3a3a3a;
+  --panel-bottom: #222;
+  --black: #090909;
+  --white: #f5f5f5;
+  --muted: #b7b7b7;
+  --line: #bdbdbd;
+  --blue: #9edaf4;
+  --green: #4cff62;
+  --red: #ff2c2c;
+  --yellow: #ffd85b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background:
+    radial-gradient(circle at 50% 22%, #f6f6f6 0%, #dfdfdf 40%, #b8b8b8 78%, #929292 100%);
+  color: var(--white);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.gr-panel {
+  border: 2px solid #171717;
+  border-radius: 6px;
+  background: linear-gradient(180deg, var(--panel-top) 0%, #494949 16%, var(--panel-middle) 53%, var(--panel-bottom) 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 3px 7px rgba(0, 0, 0, 0.6),
+    0 12px 26px rgba(0, 0, 0, 0.18);
+}
+
+.gr-title,
+.gr-heading,
+.gr-label-text,
+.outlined-text {
+  color: var(--white);
+  font-weight: 900;
+  letter-spacing: -0.6px;
+  paint-order: stroke fill;
+  -webkit-text-stroke: 1.5px #111;
+  text-shadow: 0 2px 0 #111;
+}
+
+.gr-line {
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #cfcfcf, #8d8d8d);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.7);
+}
+
+.gr-button,
+.gr-input,
+.gr-textarea,
+.gr-select {
+  border: 2px solid #111;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #2e2e2e 0%, #171717 52%, #0d0d0d 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 0 rgba(255, 255, 255, 0.08);
+  color: var(--white);
+}
+
+.gr-input,
+.gr-textarea,
+.gr-select {
+  width: 100%;
+  padding: 8px 10px;
+  font-family: Montserrat, Arial, sans-serif;
+  font-weight: 800;
+}
+
+.gr-input::placeholder,
+.gr-textarea::placeholder {
+  color: #8d8d8d;
+  opacity: 1;
+}
+
+.gr-button {
+  min-height: 36px;
+  cursor: pointer;
+  font-weight: 900;
+  text-align: center;
+}
+
+.gr-button:hover {
+  filter: brightness(1.15);
+}
+
+.gr-button:active {
+  transform: translateY(1px);
+}
+
+.gr-button.green {
+  border-color: #0b5c14;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent 44%),
+    linear-gradient(180deg, #6cff70 0%, #26d63b 100%);
+  color: #fff;
+  text-shadow:
+    -1px -1px 0 #111,
+    1px -1px 0 #111,
+    -1px 1px 0 #111,
+    1px 1px 0 #111,
+    0 2px 0 #111;
+}
+
+.gr-button.red {
+  border-color: #7f1010;
+  background: linear-gradient(180deg, #ff7777 0%, #ed2929 100%);
+  color: #fff;
+}
+
+.gr-scroll {
+  scrollbar-color: #f5f5f5 #2a2a2a;
+  scrollbar-width: thin;
+}
+
+.gr-scroll::-webkit-scrollbar {
+  width: 11px;
+}
+
+.gr-scroll::-webkit-scrollbar-track {
+  margin: 2px 0;
+  border-radius: 9px;
+  background: #222;
+}
+
+.gr-scroll::-webkit-scrollbar-thumb {
+  min-height: 46px;
+  border: 2px solid #f5f5f5;
+  border-radius: 9px;
+  background: #313131;
+}
+
+.gr-modal-backdrop {
+  position: fixed;
+  z-index: 1000;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(25, 25, 25, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.gr-modal-backdrop[hidden] {
+  display: none;
+}
+
+.gr-modal {
+  width: min(620px, 100%);
+  max-height: min(560px, calc(100vh - 36px));
+  overflow: auto;
+  border: 2px solid #111;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #5a5a5a 0%, #343434 48%, #1b1b1b 100%);
+  padding: 22px;
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.68);
+}
+
+.gr-modal h2 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.gr-modal p,
+.gr-modal li {
+  color: #ededed;
+  font-family: Montserrat, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.55;
+}
+
+.gr-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}

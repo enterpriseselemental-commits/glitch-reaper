@@ -1,0 +1,15 @@
+{
+  "name": "glitch-reaper",
+  "version": "2.1.7",
+  "private": true,
+  "description": "Browser extension for detecting website errors, failed requests, freezes, and possible memory leaks",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "check": "node tests/check.js && node --test tests/*.test.js",
+    "test:ui": "python tests/ui-browser-smoke.py",
+    "verify": "npm run check && npm run test:ui"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Report a bug</title>
+  <link rel="stylesheet" href="../shared/theme.css">
+  <link rel="stylesheet" href="manual-report.css">
+</head>
+<body>
+  <main class="reporter-backdrop">
+    <section class="reporter-panel gr-stage" role="dialog" aria-modal="true" aria-labelledby="reporterTitle">
+      <header class="reporter-header">
+        <div>
+          <p class="eyebrow">GLITCH REAPER</p>
+          <h1 id="reporterTitle">REPORT A BUG</h1>
+        </div>
+        <button id="closeButton" class="close-button" type="button" aria-label="Close reporter"></button>
+      </header>
+      <div class="gr-line"></div>
+      <form id="reportForm">
+        <p id="pageText" class="page-text"></p>
+        <label class="gr-label">
+          What went wrong?
+          <input id="titleInput" class="gr-input" type="text" maxlength="160" required autocomplete="off" placeholder="Example: Checkout button stops responding">
+        </label>
+        <fieldset class="severity-field">
+          <legend>Severity</legend>
+          <div class="severity-options">
+            <button class="severity-button high active" data-severity="high" type="button">HIGH</button>
+            <button class="severity-button medium" data-severity="medium" type="button">MEDIUM</button>
+            <button class="severity-button low" data-severity="low" type="button">LOW</button>
+          </div>
+        </fieldset>
+        <label class="gr-label">
+          What happened and what did you expect?
+          <textarea id="descriptionInput" class="gr-textarea" rows="6" maxlength="4000" placeholder="Explain the result clearly. Do not enter passwords or private information."></textarea>
+        </label>
+        <aside class="context-note">
+          Glitch Reaper attaches the current page address and browser profile to the report.
+        </aside>
+        <div class="reporter-actions">
+          <span id="statusText" role="status"></span>
+          <button id="cancelButton" class="gr-button" type="button">CANCEL</button>
+          <button class="gr-button green" type="submit">SAVE BUG</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="manual-report.js"></script>
+</body>
+</html>

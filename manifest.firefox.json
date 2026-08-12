@@ -1,0 +1,106 @@
+{
+  "manifest_version": 3,
+  "name": "Glitch Reaper",
+  "version": "2.1.7",
+  "description": "Detects website errors, failed requests, resource failures, page freezes, and possible memory leaks.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "background": {
+    "scripts": [
+      "shared/incident-utils.js",
+      "service-worker.js"
+    ]
+  },
+  "action": {
+    "default_title": "Glitch Reaper",
+    "default_popup": "dashboard/dashboard.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "options_ui": {
+    "page": "dashboard/settings.html",
+    "open_in_tab": true
+  },
+  "commands": {
+    "report-bug": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+G",
+        "mac": "Command+Shift+G"
+      },
+      "description": "Open the Glitch Reaper bug reporter"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "shared/incident-utils.js",
+        "detectors/page-monitor.js"
+      ],
+      "run_at": "document_start",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "detectors/page-runtime.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": false
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "manual-report/manual-report.html",
+        "manual-report/manual-report.css",
+        "manual-report/manual-report.js",
+        "shared/theme.css"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "{bc3542b7-5134-4d69-a6e0-2d53e59e7d6b}",
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": [
+          "none"
+        ],
+        "optional": [
+          "personallyIdentifyingInfo",
+          "browsingActivity",
+          "websiteContent",
+          "technicalAndInteraction"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Glitch Reaper</title>
+  <link rel="stylesheet" href="../shared/theme.css">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body data-surface="options">
+  <main class="app-shell">
+    <header class="top-dock gr-panel" aria-label="Main navigation">
+      <button class="dock-button active" data-view="bugs" type="button">
+        <span class="dock-icon info-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 5v9"></path><circle cx="12" cy="18" r="1.35"></circle></svg></span>
+        <span>Bugs</span>
+      </button>
+      <button class="dock-button" data-view="settings" type="button">
+        <span class="dock-icon gear-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M9.8 3.6h4.4l.6 2.1 1.5.9 2.1-.5 2.2 3.8-1.5 1.6v1.8l1.5 1.6-2.2 3.8-2.1-.5-1.5.9-.6 2.1H9.8l-.6-2.1-1.5-.9-2.1.5-2.2-3.8 1.5-1.6v-1.8L3.4 9.9l2.2-3.8 2.1.5 1.5-.9.6-2.1Z"></path><circle cx="12" cy="12.4" r="3.1"></circle></svg></span>
+        <span>Settings</span>
+      </button>
+      <button id="closeButton" class="close-button" type="button" aria-label="Close Glitch Reaper"><svg class="close-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+    </header>
+
+    <section class="workspace">
+      <div class="left-column">
+        <div id="searchBar" class="search-bar gr-panel">
+          <span class="search-icon" aria-hidden="true"></span>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="[ Search ]" aria-label="Search">
+          <button id="filterButton" class="filter-button" type="button" aria-label="Filter bugs"><span></span><span></span><span></span></button>
+          <div id="filterMenu" class="filter-menu gr-panel" hidden>
+            <button type="button" data-filter="all">All bugs</button>
+            <button type="button" data-filter="found">Found only</button>
+            <button type="button" data-filter="fixed">Fixed only</button>
+            <button type="button" data-filter="automatic">Automatic only</button>
+            <button type="button" data-filter="high">High priority</button>
+          </div>
+        </div>
+
+        <section id="bugsPanel" class="main-panel gr-panel">
+          <div class="panel-heading"><h1>BUGS</h1><div class="gr-line"></div></div>
+          <div id="bugList" class="panel-scroll gr-scroll" aria-live="polite"></div>
+        </section>
+
+        <section id="settingsPanel" class="main-panel gr-panel" hidden>
+          <div class="panel-heading"><h1>SETTINGS</h1><div class="gr-line"></div></div>
+          <form id="settingsForm" class="panel-scroll gr-scroll">
+            <div class="settings-top-actions"><button id="openFullSettingsButton" class="gr-button" type="button">OPEN IN TAB</button></div>
+            <label class="setting-row primary-setting" data-search-label="automatic bug detection recording">
+              <span>Bug Detection</span>
+              <input id="detectionEnabled" class="switch-input" type="checkbox">
+              <span class="switch-control" aria-hidden="true"></span>
+            </label>
+
+            <label class="setting-row primary-setting" data-search-label="blur sensitive data privacy">
+              <span>Blur Sensitive Data</span>
+              <input id="blurSensitiveData" class="switch-input" type="checkbox">
+              <span class="switch-control" aria-hidden="true"></span>
+            </label>
+
+            <label class="setting-row primary-setting" data-search-label="maximum bugs incidents stored storage">
+              <span>Max Bugs Stored</span>
+              <input id="maxIncidents" class="compact-input" type="number" min="25" max="1000" step="25" placeholder="[ 250 ]">
+            </label>
+
+            <label class="setting-row primary-setting" data-search-label="project name">
+              <span>Project Name</span>
+              <input id="projectName" class="compact-input" type="text" maxlength="100" placeholder="[ Name ]">
+            </label>
+
+            <div class="settings-separator"></div>
+
+            <label class="setting-stack" data-search-label="browser profile tester developer name">
+              <span>Browser Profile</span>
+              <input id="profileName" class="gr-input" type="text" maxlength="80" placeholder="Tester 1">
+            </label>
+
+            <label class="setting-stack" data-search-label="profile role tester developer">
+              <span>Profile Role</span>
+              <select id="profileRole" class="gr-select"><option value="Tester">Tester</option><option value="Developer">Developer</option></select>
+            </label>
+
+            <label class="setting-stack" data-search-label="connected websites domains allowlist">
+              <span>Connected Websites</span>
+              <textarea id="allowedHosts" class="gr-textarea" rows="3" placeholder="example.com&#10;*.staging.example.com"></textarea>
+            </label>
+
+            <div class="inline-actions" data-search-label="connect website"><button id="connectButton" class="gr-button green" type="button">CONNECT CURRENT</button></div>
+
+            <label class="setting-stack" data-search-label="excluded websites privacy">
+              <span>Excluded Websites</span>
+              <textarea id="excludedHosts" class="gr-textarea" rows="2" placeholder="accounts.example.com"></textarea>
+            </label>
+
+            <div class="settings-grid">
+              <label class="setting-stack" data-search-label="retention days storage"><span>Retention Days</span><input id="retentionDays" class="gr-input" type="number" min="1" max="90"></label>
+              <label class="setting-stack" data-search-label="long task freeze threshold"><span>Freeze Threshold MS</span><input id="longTaskMs" class="gr-input" type="number" min="200" max="5000"></label>
+            </div>
+
+            <div class="settings-separator"></div>
+
+            <label class="setting-row" data-search-label="console error detector"><span>Console Errors</span><input id="detectConsoleErrors" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+            <label class="setting-row" data-search-label="network fetch xhr error detector"><span>Network Errors</span><input id="detectNetworkErrors" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+            <label class="setting-row" data-search-label="resource load error detector"><span>Resource Errors</span><input id="detectResourceErrors" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+            <label class="setting-row" data-search-label="performance freeze long task detector"><span>UI Freezes</span><input id="detectPerformanceFreezes" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+            <label class="setting-row" data-search-label="memory leak detector"><span>Memory Leaks</span><input id="detectMemoryLeaks" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+
+            <div class="settings-grid memory-settings">
+              <label class="setting-stack" data-search-label="memory sample interval"><span>Sample Seconds</span><input id="memorySampleSeconds" class="gr-input" type="number" min="10" max="60"></label>
+              <label class="setting-stack" data-search-label="memory detection window"><span>Window Seconds</span><input id="memoryWindowSeconds" class="gr-input" type="number" min="60" max="600"></label>
+              <label class="setting-stack" data-search-label="memory growth megabytes"><span>Growth Threshold MB</span><input id="memoryGrowthMb" class="gr-input" type="number" min="16" max="512"></label>
+              <label class="setting-stack" data-search-label="page title context"><span>Page Titles</span><select id="capturePageTitle" class="gr-select"><option value="false">Do not store</option><option value="true">Store</option></select></label>
+            </div>
+
+            <label class="setting-row" data-search-label="url query parameters privacy"><span>Keep URL Query Values</span><input id="includeQueryParameters" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+
+            <div class="settings-separator"></div>
+
+            <label class="setting-stack" data-search-label="datastore local supabase cloud">
+              <span>Data Store</span>
+              <select id="datastoreMode" class="gr-select"><option value="local">Local Browser</option><option value="supabase">Supabase Cloud</option></select>
+            </label>
+
+            <section id="supabaseFields" class="cloud-fields">
+              <label class="setting-stack" data-search-label="supabase project url"><span>Supabase Project URL</span><input id="supabaseUrl" class="gr-input" type="url" placeholder="https://project.supabase.co"></label>
+              <label class="setting-stack" data-search-label="supabase publishable key api key"><span>Supabase Publishable Key</span><input id="supabaseKey" class="gr-input" type="password" autocomplete="off" placeholder="sb_publishable_..."><small class="field-help">Supabase Dashboard → Settings → API Keys → Publishable key. Older projects can use the legacy anon key. Never use a secret or service_role key here.</small></label>
+              <label class="setting-stack" data-search-label="datastore project id"><span>Glitch Reaper Project ID</span><input id="projectId" class="gr-input" type="text" autocomplete="off"></label>
+              <label class="setting-stack" data-search-label="ingest token tester"><span>Ingest Token</span><input id="ingestToken" class="gr-input" type="password" autocomplete="off"></label>
+              <label class="setting-stack" data-search-label="admin token developer"><span>Admin Token</span><input id="adminToken" class="gr-input" type="password" autocomplete="off" placeholder="Developers only"></label>
+              <label class="setting-row" data-search-label="automatic sync cloud"><span>Automatic Sync</span><input id="autoSync" class="switch-input" type="checkbox"><span class="switch-control" aria-hidden="true"></span></label>
+              <div class="cloud-actions"><button id="testDatastoreButton" class="gr-button" type="button">TEST</button><button id="syncButton" class="gr-button green" type="button">SYNC NOW</button></div>
+              <p id="syncStatus" class="sync-status">Cloud datastore is not configured.</p>
+            </section>
+
+            <section class="storage-card" data-search-label="storage local browser cloud usage">
+              <h2>BUG STORAGE</h2>
+              <p id="storageText">Loading storage…</p>
+              <div class="storage-meter"><span id="storageFill"></span></div>
+              <p>Reports are stored locally first and follow the configured retention and bug-count limits.</p>
+            </section>
+
+            <div class="settings-actions">
+              <button id="saveButton" class="gr-button green" type="submit">SAVE</button>
+              <button id="tutorialButton" class="gr-button" type="button">TUTORIAL</button>
+              <button id="exportButton" class="gr-button" type="button">EXPORT</button>
+              <button id="importButton" class="gr-button" type="button">IMPORT</button>
+              <button id="clearLocalButton" class="gr-button" type="button">CLEAR LOCAL</button>
+              <button id="clearAllButton" class="gr-button red" type="button">RESET CACHE</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <aside id="detailPanel" class="detail-panel">
+        <div class="detail-copy"><h2 id="detailTitle">Bug Name</h2><p id="detailType">Type</p><div class="timer-row"><span class="clock-icon" aria-hidden="true"></span><span id="detailTimer">00:00:00</span></div></div>
+        <section class="description-card">
+          <h3>Description</h3>
+          <p id="detailDescription">Select a bug from the list to view its report.</p>
+          <div id="detailMeta" class="detail-meta"></div>
+          <div class="detail-actions"><button id="fixButton" class="select-button" type="button" disabled>SELECT</button><button id="exportBugButton" class="mini-button" type="button" disabled>EXPORT</button><button id="deleteBugButton" class="mini-button danger" type="button" disabled>DELETE</button></div>
+        </section>
+      </aside>
+    </section>
+
+    <div id="toast" class="toast" role="status" hidden></div>
+    <input id="importInput" type="file" accept="application/json,.json" hidden>
+  </main>
+
+  <div id="tutorialOverlay" class="gr-modal-backdrop" hidden>
+    <section class="gr-modal tutorial-modal" role="dialog" aria-modal="true" aria-label="Glitch Reaper setup">
+      <div class="tutorial-step active" data-step="0">
+        <h2 class="outlined-text">PROJECT SETUP</h2>
+        <p>Set the project name used in reports and the profile name attached to this browser.</p>
+        <label class="setting-stack">
+          <span>Project Name</span>
+          <input id="tourProjectName" class="gr-input" type="text" autocomplete="off">
+        </label>
+        <label class="setting-stack">
+          <span>Profile Name</span>
+          <input id="tourProfileName" class="gr-input" type="text" autocomplete="off" placeholder="Developer">
+        </label>
+      </div>
+
+      <div class="tutorial-step" data-step="1">
+        <h2 class="outlined-text">STORAGE</h2>
+        <p>Local Browser keeps reports on this device. Supabase Cloud syncs reports to a shared project database. Cloud credentials are configured in Settings after setup.</p>
+        <label class="setting-stack">
+          <span>Data Store</span>
+          <select id="tourDatastoreMode" class="gr-select">
+            <option value="local">Local Browser</option>
+            <option value="supabase">Supabase Cloud</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="tutorial-step" data-step="2">
+        <h2 class="outlined-text">BUG DETECTION</h2>
+        <p>Enter the website Glitch Reaper should monitor, then enable detection. Reload the website after setup so the detectors can start.</p>
+        <label class="setting-stack">
+          <span>Website Domain</span>
+          <input id="tourWebsite" class="gr-input" type="text" inputmode="url" autocomplete="off" placeholder="example.com">
+        </label>
+        <label class="setting-row">
+          <span>Enable Bug Detection</span>
+          <input id="tourDetectionEnabled" class="switch-input" type="checkbox">
+          <span class="switch-control" aria-hidden="true"></span>
+        </label>
+      </div>
+
+      <div class="tutorial-footer">
+        <button id="tutorialBack" class="gr-button" type="button">BACK</button>
+        <div id="tutorialDots" class="tutorial-dots"></div>
+        <button id="tutorialNext" class="gr-button green" type="button">NEXT</button>
+      </div>
+      <p id="tutorialStatus" class="modal-status"></p>
+    </section>
+  </div>
+
+  <div id="confirmOverlay" class="gr-modal-backdrop" hidden>
+    <section class="gr-modal confirm-modal" role="dialog" aria-modal="true" aria-labelledby="confirmTitle"><h2 id="confirmTitle" class="outlined-text">CONFIRM</h2><p id="confirmText"></p><div class="confirm-actions"><button id="confirmCancel" class="gr-button" type="button">CANCEL</button><button id="confirmAccept" class="gr-button red" type="button">CONFIRM</button></div></section>
+  </div>
+
+  <script src="../shared/incident-utils.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
