@@ -342,14 +342,11 @@ Glitch Reaper separates page instrumentation from extension state and persistenc
 
 ```text
 page
-  │
-  ▼
+⬇
 page-runtime.js
-  │
-  ▼
+⬇
 page-monitor.js
-  │
-  ▼
+⬇
 service-worker.js
   │
   ├── local storage
