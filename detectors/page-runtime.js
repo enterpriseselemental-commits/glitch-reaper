@@ -1,3 +1,5 @@
+// coordinates page error, resource, performance and memory detection
+
 'use strict';
 
 (() => {
