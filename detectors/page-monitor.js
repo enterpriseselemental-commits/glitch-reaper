@@ -1,3 +1,5 @@
+// owns persistent extension state, report processing and cloud sync
+
 'use strict';
 
 (() => {
