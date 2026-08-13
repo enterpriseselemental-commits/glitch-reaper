@@ -1,3 +1,5 @@
+// manages persistent extension state, incident processing and cloud sync
+
 'use strict';
 
 if (typeof GlitchReaperCore === 'undefined' && typeof importScripts === 'function') {
